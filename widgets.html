@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vibrant Weather | Widget Gallery</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "tertiary-fixed": "#ffd9e0",
+                "secondary": "#9b4500",
+                "on-tertiary-fixed-variant": "#8f0043",
+                "error-container": "#ffdad6",
+                "on-primary": "#ffffff",
+                "secondary-fixed-dim": "#ffb68d",
+                "on-primary-container": "#002d4d",
+                "on-tertiary": "#ffffff",
+                "surface-bright": "#f7f9fb",
+                "primary-fixed": "#cfe5ff",
+                "on-tertiary-fixed": "#3f001a",
+                "inverse-primary": "#9acbff",
+                "on-secondary-container": "#672c00",
+                "on-surface-variant": "#404751",
+                "surface-variant": "#e0e3e5",
+                "surface-container-lowest": "#ffffff",
+                "primary": "#00629e",
+                "surface-container": "#eceef0",
+                "on-error": "#ffffff",
+                "outline-variant": "#bfc7d3",
+                "on-secondary-fixed-variant": "#763300",
+                "on-primary-fixed-variant": "#004a79",
+                "background": "#f7f9fb",
+                "on-secondary-fixed": "#331200",
+                "tertiary-container": "#ff508e",
+                "surface-tint": "#00629e",
+                "surface": "#f7f9fb",
+                "secondary-container": "#fc8a40",
+                "error": "#ba1a1a",
+                "tertiary": "#b80c5a",
+                "on-surface": "#191c1e",
+                "on-background": "#191c1e",
+                "inverse-on-surface": "#eff1f3",
+                "surface-container-highest": "#e0e3e5",
+                "secondary-fixed": "#ffdbc9",
+                "outline": "#707882",
+                "on-tertiary-container": "#5c0029",
+                "on-secondary": "#ffffff",
+                "tertiary-fixed-dim": "#ffb1c4",
+                "surface-container-high": "#e6e8ea",
+                "on-error-container": "#93000a",
+                "primary-fixed-dim": "#9acbff",
+                "on-primary-fixed": "#001d34",
+                "surface-dim": "#d8dadc",
+                "inverse-surface": "#2d3133",
+                "primary-container": "#3198e8",
+                "surface-container-low": "#f2f4f6"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.5rem",
+                "lg": "1rem",
+                "xl": "1.5rem",
+                "full": "9999px"
+            },
+            "fontFamily": {
+                "headline": ["Plus Jakarta Sans"],
+                "display": ["Plus Jakarta Sans"],
+                "body": ["Plus Jakarta Sans"],
+                "label": ["Plus Jakarta Sans"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .glass-widget {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-[#0f1113] text-white min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-[#191c1e] text-[#9acbff] shadow-none sticky top-0 z-50 border-b border-[#404751]">
+<nav class="flex justify-between items-center w-full px-6 py-4 max-w-7xl mx-auto">
+<div class="text-2xl font-extrabold text-[#9acbff]">Vibrant Weather</div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="text-[#404751] dark:text-[#e0e3e5] hover:text-[#00629e] transition-colors" href="widgets.html">Gallery</a>
+<a class="text-[#9acbff] border-b-2 border-[#00629e] pb-1 font-bold" href="widgets.html">Widgets</a>
+<a class="text-[#404751] dark:text-[#e0e3e5] hover:text-[#00629e] transition-colors" href="forecast.html">Forecast</a>
+<a class="text-[#404751] dark:text-[#e0e3e5] hover:text-[#00629e] transition-colors" href="insights.html">Maps</a>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-2xl cursor-pointer hover:bg-[#2d3133] p-2 rounded-full transition-colors" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined text-2xl cursor-pointer hover:bg-[#2d3133] p-2 rounded-full transition-colors" data-icon="account_circle">account_circle</span>
+</div>
+</nav>
+</header>
+<main class="flex-grow max-w-7xl mx-auto px-6 py-12 w-full">
+<header class="mb-12">
+<h1 class="text-4xl font-extrabold tracking-tight mb-4 text-[#9acbff]">Widget Ecosystem</h1>
+<p class="text-[#e0e3e5] text-lg max-w-2xl">A collection of modular, AI-powered weather components designed for high-clarity glanceable data. Built with premium glassmorphism for dark mode environments.</p>
+</header>
+<!-- Bento Grid Layout for Widgets -->
+<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+<!-- 1. Current Temp/Condition (Large) -->
+<div class="glass-widget rounded-xl p-6 col-span-1 md:col-span-2 row-span-1 flex items-center justify-between overflow-hidden relative group">
+<div class="z-10">
+<p class="text-[#9acbff] font-bold text-sm tracking-widest uppercase mb-2">San Francisco, CA</p>
+<div class="flex items-baseline gap-2">
+<span class="text-6xl font-extrabold tracking-tighter">72°</span>
+<span class="text-2xl text-[#e0e3e5] font-medium">F</span>
+</div>
+<p class="text-xl font-semibold mt-2">Partly Cloudy</p>
+<div class="flex gap-4 mt-4 text-[#e0e3e5] text-sm">
+<span>H: 76°</span>
+<span>L: 58°</span>
+</div>
+</div>
+<div class="z-10">
+<span class="material-symbols-outlined text-8xl text-[#9acbff] opacity-80" data-icon="partly_cloudy_day">partly_cloudy_day</span>
+</div>
+<!-- Background Glow -->
+<div class="absolute -right-12 -top-12 w-48 h-48 bg-[#00629e] opacity-20 blur-[80px] rounded-full"></div>
+</div>
+<!-- 2. AI Clothing Suggestion (Dynamic Color) -->
+<div class="glass-widget rounded-xl p-6 col-span-1 border-l-4 border-l-[#fc8a40]">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-secondary" data-icon="smart_toy">smart_toy</span>
+<span class="font-bold text-sm tracking-tight text-secondary uppercase">AI Suggestion</span>
+</div>
+<p class="text-lg font-medium leading-snug">"Perfect for a light denim jacket. No umbrella needed today."</p>
+<div class="mt-6 flex gap-2">
+<span class="bg-white/10 px-3 py-1 rounded-full text-xs font-bold">Jacket</span>
+<span class="bg-white/10 px-3 py-1 rounded-full text-xs font-bold">Sunglasses</span>
+</div>
+</div>
+<!-- 3. Air Quality -->
+<div class="glass-widget rounded-xl p-6 col-span-1">
+<div class="flex justify-between items-start mb-6">
+<span class="material-symbols-outlined text-[#3198e8]" data-icon="air">air</span>
+<span class="text-xs font-bold bg-[#3198e8]/20 text-[#9acbff] px-2 py-1 rounded">Good</span>
+</div>
+<p class="text-sm font-medium text-[#e0e3e5] mb-1">Air Quality</p>
+<p class="text-3xl font-extrabold">24</p>
+<div class="w-full bg-white/10 h-1.5 rounded-full mt-4">
+<div class="bg-gradient-to-r from-green-400 to-blue-400 h-full w-[24%] rounded-full shadow-[0_0_8px_rgba(74,222,128,0.5)]"></div>
+</div>
+</div>
+<!-- 4. 3-Hour Forecast -->
+<div class="glass-widget rounded-xl p-6 col-span-1 md:col-span-2">
+<p class="text-sm font-bold text-[#e0e3e5] mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="schedule">schedule</span>
+                    Hourly Forecast
+                </p>
+<div class="flex justify-between items-center text-center">
+<div class="flex flex-col items-center gap-2">
+<span class="text-xs text-[#e0e3e5]">1PM</span>
+<span class="material-symbols-outlined text-[#9acbff]" data-icon="sunny">sunny</span>
+<span class="font-bold">72°</span>
+</div>
+<div class="w-px h-12 bg-white/10"></div>
+<div class="flex flex-col items-center gap-2">
+<span class="text-xs text-[#e0e3e5]">2PM</span>
+<span class="material-symbols-outlined text-[#9acbff]" data-icon="sunny">sunny</span>
+<span class="font-bold">74°</span>
+</div>
+<div class="w-px h-12 bg-white/10"></div>
+<div class="flex flex-col items-center gap-2">
+<span class="text-xs text-[#e0e3e5]">3PM</span>
+<span class="material-symbols-outlined text-[#9acbff]" data-icon="partly_cloudy_day">partly_cloudy_day</span>
+<span class="font-bold">73°</span>
+</div>
+<div class="w-px h-12 bg-white/10"></div>
+<div class="flex flex-col items-center gap-2">
+<span class="text-xs text-[#e0e3e5]">4PM</span>
+<span class="material-symbols-outlined text-[#9acbff]" data-icon="cloud">cloud</span>
+<span class="font-bold">70°</span>
+</div>
+</div>
+</div>
+<!-- 5. Wind & Humidity -->
+<div class="glass-widget rounded-xl p-6 col-span-1">
+<div class="space-y-6">
+<div>
+<div class="flex items-center gap-2 text-[#e0e3e5] text-xs font-bold mb-2">
+<span class="material-symbols-outlined text-sm" data-icon="airwave">airwave</span>
+                            WIND
+                        </div>
+<div class="flex items-baseline gap-1">
+<span class="text-2xl font-extrabold">12</span>
+<span class="text-xs text-[#e0e3e5]">MPH</span>
+</div>
+</div>
+<div class="h-px bg-white/10 w-full"></div>
+<div>
+<div class="flex items-center gap-2 text-[#e0e3e5] text-xs font-bold mb-2">
+<span class="material-symbols-outlined text-sm" data-icon="humidity_mid">humidity_mid</span>
+                            HUMIDITY
+                        </div>
+<div class="flex items-baseline gap-1">
+<span class="text-2xl font-extrabold">42</span>
+<span class="text-xs text-[#e0e3e5]">%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- 6. Activity Recommendation -->
+<div class="glass-widget rounded-xl p-6 col-span-1 border-l-4 border-l-[#ff508e]">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-tertiary" data-icon="fitness_center">fitness_center</span>
+<span class="font-bold text-sm tracking-tight text-tertiary uppercase">Activity</span>
+</div>
+<p class="text-lg font-medium leading-snug">"Excellent conditions for an outdoor jog or city park walk."</p>
+<div class="mt-6 flex items-center gap-2 text-[#e0e3e5]">
+<span class="material-symbols-outlined text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs font-bold">Recommended for you</span>
+</div>
+</div>
+<!-- 7. UV Index -->
+<div class="glass-widget rounded-xl p-6 col-span-1">
+<div class="flex justify-between items-start mb-6">
+<span class="material-symbols-outlined text-secondary" data-icon="light_mode">light_mode</span>
+<span class="text-xs font-bold bg-secondary/20 text-[#fc8a40] px-2 py-1 rounded">Moderate</span>
+</div>
+<p class="text-sm font-medium text-[#e0e3e5] mb-1">UV Index</p>
+<p class="text-3xl font-extrabold">4</p>
+<div class="relative w-full h-1.5 bg-white/10 rounded-full mt-4">
+<div class="absolute left-[40%] -top-1 w-3 h-3 bg-white rounded-full border-2 border-secondary"></div>
+<div class="h-full w-full rounded-full bg-gradient-to-r from-green-400 via-yellow-400 to-red-500"></div>
+</div>
+</div>
+<!-- 8. Sunrise & Sunset -->
+<div class="glass-widget rounded-xl p-6 col-span-1">
+<p class="text-sm font-bold text-[#e0e3e5] mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="wb_twilight">wb_twilight</span>
+                    SOLAR CYCLE
+                </p>
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<span class="text-xs text-[#e0e3e5]">Sunrise</span>
+<span class="font-bold">6:12 AM</span>
+</div>
+<div class="relative py-2">
+<div class="w-full h-[1px] bg-white/20"></div>
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-4 h-4 bg-[#9acbff] rounded-full blur-[4px]"></div>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-xs text-[#e0e3e5]">Sunset</span>
+<span class="font-bold">7:48 PM</span>
+</div>
+</div>
+</div>
+<!-- 9. Mini Radar (Map Location) -->
+<div class="glass-widget rounded-xl col-span-1 md:col-span-2 overflow-hidden relative min-h-[200px]">
+<img alt="Weather Radar" class="absolute inset-0 w-full h-full object-cover opacity-60 grayscale hover:grayscale-0 transition-all duration-700" data-alt="A detailed digital weather radar map showing green and blue precipitation patterns over a topographical map of coastal California. The style is modern and clean with high-tech data overlays and a subtle dark-mode aesthetic that fits into a premium weather application interface." data-location="San Francisco" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArjtivU2zOZ7PDLv8iKGZUW17Z3Sb7VM9yNeCAmX99rZnRgyJ8dT_H8GIEzEQ1ywi6WSg5Afs3JN_zhl2NXxUs2X_fnmCsmFsI_wj_L2AeieCHiFKsz9j_dVXvZ-XB9iom7lFL7Dqy3iVawDpyCJmqd9QjUQ_qkJh8fP94Cdw1fjmPyiB9MysM5V-Ce8bQV7uX-9SGleJKKH8CV_HOnmHOPLwdYPTRxTotzJ8ibHbw4uhK4LgEjmIgrTglzmY_FQ6Yll4uZ929cFxj"/>
+<div class="absolute inset-0 bg-gradient-to-t from-[#0f1113] to-transparent"></div>
+<div class="absolute top-4 left-4 z-10">
+<div class="bg-black/50 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 flex items-center gap-2">
+<div class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+<span class="text-[10px] font-bold uppercase tracking-widest">Live Radar</span>
+</div>
+</div>
+<div class="absolute bottom-4 left-4 z-10">
+<p class="text-lg font-bold">Storm Tracking</p>
+<p class="text-xs text-[#e0e3e5]">No severe threats in your area</p>
+</div>
+</div>
+<!-- 10. Precipitation Chance -->
+<div class="glass-widget rounded-xl p-6 col-span-1">
+<div class="flex items-center gap-2 text-[#e0e3e5] text-xs font-bold mb-6">
+<span class="material-symbols-outlined text-sm" data-icon="rainy">rainy</span>
+                    PRECIPITATION
+                </div>
+<div class="relative flex items-center justify-center">
+<!-- Circular Progress Mockup -->
+<svg class="w-24 h-24 transform -rotate-90">
+<circle class="text-white/10" cx="48" cy="48" fill="transparent" r="40" stroke="currentColor" stroke-width="8"></circle>
+<circle class="text-[#9acbff]" cx="48" cy="48" fill="transparent" r="40" stroke="currentColor" stroke-dasharray="251.2" stroke-dashoffset="226" stroke-width="8"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-2xl font-extrabold">10%</span>
+</div>
+</div>
+<p class="text-center text-xs text-[#e0e3e5] mt-4">Likely dry for the next 24h</p>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-[#2d3133] text-[#9acbff] w-full rounded-t-xl border-t border-[#404751] mt-auto">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-8 py-12 max-w-7xl mx-auto">
+<div class="mb-8 md:mb-0">
+<div class="text-lg font-bold text-[#f7f9fb] mb-2">Vibrant Weather</div>
+<p class="text-[#e0e3e5] font-['Plus_Jakarta_Sans'] text-sm font-medium">© 2024 Vibrant Weather. Powered by AI Insights.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="text-[#e0e3e5] hover:underline hover:text-[#00629e] font-['Plus_Jakarta_Sans'] text-sm font-medium" href="#">Privacy Policy</a>
+<a class="text-[#e0e3e5] hover:underline hover:text-[#00629e] font-['Plus_Jakarta_Sans'] text-sm font-medium" href="#">Terms of Service</a>
+<a class="text-[#e0e3e5] hover:underline hover:text-[#00629e] font-['Plus_Jakarta_Sans'] text-sm font-medium" href="#">API Access</a>
+<a class="text-[#e0e3e5] hover:underline hover:text-[#00629e] font-['Plus_Jakarta_Sans'] text-sm font-medium" href="#">Support</a>
+</div>
+</div>
+</footer>
+</body></html>

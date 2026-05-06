@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SkySense AI - Weather Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"on-surface": "#191c1e", "secondary-fixed": "#ffdbc9", background: "#f7f9fb", outline: "#707882", "tertiary-container": "#ff508e", secondary: "#9b4500", "on-tertiary-fixed": "#3f001a", "surface-dim": "#d8dadc", "primary-fixed-dim": "#9acbff", "on-tertiary-container": "#5c0029", "on-primary": "#ffffff", "surface-container-lowest": "#ffffff", "on-primary-fixed-variant": "#004a79", "on-primary-fixed": "#001d34", "outline-variant": "#bfc7d3", "tertiary-fixed-dim": "#ffb1c4", "surface-container-low": "#f2f4f6", "secondary-fixed-dim": "#ffb68d", primary: "#00629e", "on-background": "#191c1e", "surface-tint": "#00629e", "on-secondary": "#ffffff", "secondary-container": "#fc8a40", "primary-fixed": "#cfe5ff", "on-error": "#ffffff", "surface-container-highest": "#e0e3e5", surface: "#f7f9fb", "on-primary-container": "#002d4d", "error-container": "#ffdad6", "surface-container": "#eceef0", "inverse-on-surface": "#eff1f3", "on-secondary-container": "#672c00", "surface-container-high": "#e6e8ea", "on-secondary-fixed": "#331200", "surface-bright": "#f7f9fb", "primary-container": "#3198e8", "on-tertiary-fixed-variant": "#8f0043", "surface-variant": "#e0e3e5", "inverse-primary": "#9acbff", "on-surface-variant": "#404751", tertiary: "#b80c5a", "tertiary-fixed": "#ffd9e0", "on-error-container": "#93000a", error: "#ba1a1a", "on-tertiary": "#ffffff", "on-secondary-fixed-variant": "#763300", "inverse-surface": "#2d3133"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}, spacing: {gutter: "20px", md: "24px", "container-margin": "24px", lg: "40px", base: "4px", xl: "64px", sm: "16px", xs: "8px"}, fontFamily: {"body-md": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "label-bold": ["Plus Jakarta Sans"], "label-sm": ["Plus Jakarta Sans"], "display-xl": ["Plus Jakarta Sans"], headline: ["Plus Jakarta Sans"], display: ["Plus Jakarta Sans"], body: ["Plus Jakarta Sans"], label: ["Plus Jakarta Sans"]}, fontSize: {"body-md": ["16px", {lineHeight: "1.5", fontWeight: "400"}], "headline-lg": ["32px", {lineHeight: "1.2", letterSpacing: "-0.01em", fontWeight: "700"}], "body-lg": ["18px", {lineHeight: "1.6", fontWeight: "400"}], "headline-md": ["24px", {lineHeight: "1.3", fontWeight: "700"}], "label-bold": ["14px", {lineHeight: "1.4", fontWeight: "700"}], "label-sm": ["12px", {lineHeight: "1.4", fontWeight: "500"}], "display-xl": ["48px", {lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "800"}]}}}};</script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-background font-body-md text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="bg-white/90 dark:bg-slate-950/90 backdrop-blur-md docked full-width top-0 z-50 border-b border-blue-50 dark:border-slate-800 shadow-xl shadow-blue-500/5 sticky">
+<div class="flex justify-between items-center w-full px-6 py-4 max-w-7xl mx-auto">
+<div class="flex items-center gap-2">
+<span class="text-xl font-extrabold tracking-tight text-blue-600 dark:text-blue-400 font-headline-md">SkySense AI</span>
+</div>
+<!-- Desktop Search Bar -->
+<div class="hidden md:flex items-center bg-surface-container rounded-full px-4 py-2 w-96 border border-outline-variant focus-within:border-primary-container focus-within:shadow-lg transition-all">
+<span class="material-symbols-outlined text-outline mr-2" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-md w-full placeholder:text-outline-variant" placeholder="Enter city or zip code" type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-blue-50 dark:hover:bg-slate-800 transition-colors text-slate-400">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<div class="h-10 w-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary overflow-hidden">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A professional headshot of a smiling young adult with a friendly expression. The background is a clean, soft blue gradient that matches the SkySense AI color palette. The lighting is bright and optimistic, conveying a sense of helpfulness and reliability." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_iwfNdZWfRzCSrZxRkcZRG4VQCzCwVaIEsxgncDotK0JTWzMF2f3lCqORyG7ZzycxVt4Tbylq04CMP17yO_S4sKX0rj5oTKp7rNiL1EB8c56B0Ps7uC3PHExECcFIVDgbdIBKfuvRJqIu9vXh6H3IytlsAEM6nF33xpmitXMu7U84OlZqg_Ol4RxEA98jnNSsZBQcra6meSn_HY2IwElhPOXTd4dBi0G6fE-yDgN8fHZ4udHPnJ5bqtKmWiMUb-V3P9A1nje8Ozn2"/>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-container-margin py-lg space-y-lg">
+<!-- Hero Section: Current Weather -->
+<section class="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-primary-container to-primary p-8 md:p-12 text-on-primary shadow-2xl shadow-blue-500/20">
+<div class="relative z-10 grid md:grid-cols-2 gap-8 items-center">
+<div>
+<div class="flex items-center gap-2 mb-4 bg-white/20 backdrop-blur-sm w-fit px-4 py-1.5 rounded-full">
+<span class="material-symbols-outlined text-sm" data-icon="location_on">location_on</span>
+<span class="font-label-bold uppercase tracking-wider text-[11px]">Your Current Location</span>
+</div>
+<h1 class="font-display-xl text-display-xl mb-2">New York, NY</h1>
+<p class="font-headline-md text-headline-md opacity-90 mb-8">Sunny, 72°F</p>
+<div class="flex gap-4">
+<div class="bg-white/10 p-4 rounded-2xl flex items-center gap-4">
+<span class="material-symbols-outlined text-3xl" data-icon="device_thermostat">device_thermostat</span>
+<div>
+<p class="text-label-sm opacity-70">High / Low</p>
+<p class="font-label-bold">78° / 64°</p>
+</div>
+</div>
+<div class="bg-white/10 p-4 rounded-2xl flex items-center gap-4">
+<span class="material-symbols-outlined text-3xl" data-icon="air">air</span>
+<div>
+<p class="text-label-sm opacity-70">Wind</p>
+<p class="font-label-bold">12 mph NW</p>
+</div>
+</div>
+</div>
+</div>
+<div class="hidden md:flex justify-end">
+<div class="relative w-64 h-64">
+<span class="material-symbols-outlined text-[180px] text-white/40 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" data-icon="sunny">sunny</span>
+<span class="material-symbols-outlined text-[120px] text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" data-icon="sunny" style="font-variation-settings: 'FILL' 1;">sunny</span>
+</div>
+</div>
+</div>
+<!-- Decorative Elements -->
+<div class="absolute -top-24 -right-24 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
+<div class="absolute -bottom-24 -left-24 w-96 h-96 bg-blue-400/20 rounded-full blur-3xl"></div>
+</section>
+<!-- Bento Grid Main Content -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-md">
+<!-- Left Column: Metrics & Forecast -->
+<div class="lg:col-span-8 space-y-md">
+<!-- Real-time Metrics Grid -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="bg-white p-6 rounded-[24px] shadow-sm border border-blue-50/50 flex flex-col items-center text-center">
+<div class="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center text-primary mb-4">
+<span class="material-symbols-outlined" data-icon="humidity_percentage">humidity_percentage</span>
+</div>
+<p class="text-label-sm text-outline mb-1">Humidity</p>
+<p class="font-headline-md">45%</p>
+</div>
+<div class="bg-white p-6 rounded-[24px] shadow-sm border border-blue-50/50 flex flex-col items-center text-center">
+<div class="w-12 h-12 rounded-2xl bg-orange-50 flex items-center justify-center text-orange-500 mb-4">
+<span class="material-symbols-outlined" data-icon="wb_sunny">wb_sunny</span>
+</div>
+<p class="text-label-sm text-outline mb-1">UV Index</p>
+<p class="font-headline-md">6 Med</p>
+</div>
+<div class="bg-white p-6 rounded-[24px] shadow-sm border border-blue-50/50 flex flex-col items-center text-center">
+<div class="w-12 h-12 rounded-2xl bg-indigo-50 flex items-center justify-center text-indigo-500 mb-4">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+</div>
+<p class="text-label-sm text-outline mb-1">Visibility</p>
+<p class="font-headline-md">10 mi</p>
+</div>
+<div class="bg-white p-6 rounded-[24px] shadow-sm border border-blue-50/50 flex flex-col items-center text-center">
+<div class="w-12 h-12 rounded-2xl bg-cyan-50 flex items-center justify-center text-cyan-500 mb-4">
+<span class="material-symbols-outlined" data-icon="compress">compress</span>
+</div>
+<p class="text-label-sm text-outline mb-1">Pressure</p>
+<p class="font-headline-md">1012 hPa</p>
+</div>
+</div>
+<!-- 7-Day Forecast Section -->
+<div class="bg-white rounded-[32px] p-6 shadow-sm border border-blue-50/50">
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-headline-md text-on-surface">7-Day Forecast</h2>
+<button class="text-primary font-label-bold text-sm hover:underline">Full Details</button>
+</div>
+<div class="flex flex-col md:flex-row justify-between gap-4 overflow-x-auto pb-4">
+<!-- Forecast Days -->
+<div class="flex-1 min-w-[100px] bg-surface-container-low rounded-[24px] p-4 flex flex-col items-center gap-2 border border-transparent hover:border-primary-container/30 transition-all">
+<p class="font-label-bold text-outline uppercase text-[10px]">Today</p>
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="sunny" style="font-variation-settings: 'FILL' 1;">sunny</span>
+<p class="font-label-bold text-on-surface">72°</p>
+<p class="text-label-sm text-outline opacity-70">62°</p>
+</div>
+<div class="flex-1 min-w-[100px] bg-white rounded-[24px] p-4 flex flex-col items-center gap-2 border border-surface-container-highest">
+<p class="font-label-bold text-outline uppercase text-[10px]">Mon</p>
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="partly_cloudy_day">partly_cloudy_day</span>
+<p class="font-label-bold text-on-surface">75°</p>
+<p class="text-label-sm text-outline opacity-70">64°</p>
+</div>
+<div class="flex-1 min-w-[100px] bg-white rounded-[24px] p-4 flex flex-col items-center gap-2 border border-surface-container-highest">
+<p class="font-label-bold text-outline uppercase text-[10px]">Tue</p>
+<span class="material-symbols-outlined text-blue-400 text-3xl" data-icon="cloudy">cloudy</span>
+<p class="font-label-bold text-on-surface">68°</p>
+<p class="text-label-sm text-outline opacity-70">60°</p>
+</div>
+<div class="flex-1 min-w-[100px] bg-white rounded-[24px] p-4 flex flex-col items-center gap-2 border border-surface-container-highest">
+<p class="font-label-bold text-outline uppercase text-[10px]">Wed</p>
+<span class="material-symbols-outlined text-blue-500 text-3xl" data-icon="rainy">rainy</span>
+<p class="font-label-bold text-on-surface">64°</p>
+<p class="text-label-sm text-outline opacity-70">58°</p>
+</div>
+<div class="flex-1 min-w-[100px] bg-white rounded-[24px] p-4 flex flex-col items-center gap-2 border border-surface-container-highest">
+<p class="font-label-bold text-outline uppercase text-[10px]">Thu</p>
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="sunny">sunny</span>
+<p class="font-label-bold text-on-surface">74°</p>
+<p class="text-label-sm text-outline opacity-70">63°</p>
+</div>
+<div class="flex-1 min-w-[100px] bg-white rounded-[24px] p-4 flex flex-col items-center gap-2 border border-surface-container-highest">
+<p class="font-label-bold text-outline uppercase text-[10px]">Fri</p>
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="wb_sunny">wb_sunny</span>
+<p class="font-label-bold text-on-surface">79°</p>
+<p class="text-label-sm text-outline opacity-70">67°</p>
+</div>
+<div class="flex-1 min-w-[100px] bg-white rounded-[24px] p-4 flex flex-col items-center gap-2 border border-surface-container-highest">
+<p class="font-label-bold text-outline uppercase text-[10px]">Sat</p>
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="sunny" style="font-variation-settings: 'FILL' 1;">sunny</span>
+<p class="font-label-bold text-on-surface">82°</p>
+<p class="text-label-sm text-outline opacity-70">70°</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: AI Assistant & Locations -->
+<div class="lg:col-span-4 space-y-md">
+<!-- AI Assistant Section -->
+<section class="bg-inverse-surface rounded-[32px] p-6 text-white relative overflow-hidden group">
+<div class="relative z-10">
+<div class="flex items-center gap-3 mb-6">
+<div class="p-2.5 rounded-2xl bg-gradient-to-tr from-primary-container to-tertiary-container shadow-lg">
+<span class="material-symbols-outlined text-white" data-icon="smart_toy" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</div>
+<div>
+<h3 class="font-label-bold">Your Smart Weather Companion</h3>
+<p class="text-[10px] uppercase tracking-widest text-primary-fixed opacity-70">Powered by SkySense AI</p>
+</div>
+</div>
+<div class="space-y-4">
+<div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/5 hover:bg-white/15 transition-all">
+<div class="flex items-center gap-3 mb-1">
+<span class="material-symbols-outlined text-primary-fixed-dim text-xl" data-icon="checkroom">checkroom</span>
+<span class="font-label-bold text-sm">Clothing</span>
+</div>
+<p class="text-body-md text-surface-container-low">Light layers recommended today.</p>
+</div>
+<div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/5 hover:bg-white/15 transition-all">
+<div class="flex items-center gap-3 mb-1">
+<span class="material-symbols-outlined text-secondary-fixed-dim text-xl" data-icon="park">park</span>
+<span class="font-label-bold text-sm">Activities</span>
+</div>
+<p class="text-body-md text-surface-container-low">Great for a park walk.</p>
+</div>
+<div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/5 hover:bg-white/15 transition-all">
+<div class="flex items-center gap-3 mb-1">
+<span class="material-symbols-outlined text-tertiary-fixed-dim text-xl" data-icon="schedule">schedule</span>
+<span class="font-label-bold text-sm">Best Time</span>
+</div>
+<p class="text-body-md text-surface-container-low">Optimized window: 2-5 PM.</p>
+</div>
+</div>
+</div>
+<!-- Decorative AI Glow -->
+<div class="absolute -bottom-10 -right-10 w-40 h-40 bg-primary/20 rounded-full blur-[80px]"></div>
+</section>
+<!-- Locations Widget -->
+<div class="bg-white rounded-[32px] p-6 shadow-sm border border-blue-50/50">
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-label-bold text-on-surface">Saved Locations</h2>
+<button class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined text-xl" data-icon="add">add</span>
+</button>
+</div>
+<div class="space-y-3">
+<div class="flex items-center justify-between p-4 rounded-[24px] bg-blue-50/50 border border-blue-100">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="near_me">near_me</span>
+<div>
+<p class="font-label-bold text-sm">New York</p>
+<p class="text-[11px] text-outline">United States</p>
+</div>
+</div>
+<p class="font-headline-md text-primary">72°</p>
+</div>
+<div class="flex items-center justify-between p-4 rounded-[24px] bg-white border border-surface-container-highest hover:bg-surface-container-low cursor-pointer transition-all">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline-variant" data-icon="location_on">location_on</span>
+<div>
+<p class="font-label-bold text-sm">London</p>
+<p class="text-[11px] text-outline">United Kingdom</p>
+</div>
+</div>
+<p class="font-headline-md text-on-surface">58°</p>
+</div>
+<div class="flex items-center justify-between p-4 rounded-[24px] bg-white border border-surface-container-highest hover:bg-surface-container-low cursor-pointer transition-all">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline-variant" data-icon="location_on">location_on</span>
+<div>
+<p class="font-label-bold text-sm">Tokyo</p>
+<p class="text-[11px] text-outline">Japan</p>
+</div>
+</div>
+<p class="font-headline-md text-on-surface">65°</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pt-3 pb-8 bg-white/95 dark:bg-slate-900/95 backdrop-blur-lg border-t border-blue-50 dark:border-slate-800 shadow-[0_-8px_30px_rgb(49,152,232,0.12)] rounded-t-[32px]">
+<a class="flex flex-col items-center justify-center bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-300 rounded-2xl px-4 py-2 transition-transform duration-300 active:translate-y-[-2px]" href="home page.html">
+<span class="material-symbols-outlined mb-1" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-bold uppercase tracking-wider">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-4 py-2 hover:text-blue-500 transition-transform duration-300 active:translate-y-[-2px]" href="forecast.html">
+<span class="material-symbols-outlined mb-1" data-icon="calendar_month">calendar_month</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-bold uppercase tracking-wider">Forecast</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-4 py-2 hover:text-blue-500 transition-transform duration-300 active:translate-y-[-2px]" href="ai bot.html">
+<span class="material-symbols-outlined mb-1" data-icon="smart_toy">smart_toy</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-bold uppercase tracking-wider">AI Insights</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-4 py-2 hover:text-blue-500 transition-transform duration-300 active:translate-y-[-2px]" href="settings.html">
+<span class="material-symbols-outlined mb-1" data-icon="settings">settings</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-bold uppercase tracking-wider">Settings</span>
+</a>
+</nav>
+</body></html>
