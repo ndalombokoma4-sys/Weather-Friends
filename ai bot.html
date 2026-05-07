@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI Assistant - Weather Friends</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary": "#ffffff",
+                        "surface-variant": "#e0e3e5",
+                        "tertiary-container": "#ff508e",
+                        "secondary-container": "#fc8a40",
+                        "on-surface": "#191c1e",
+                        "surface-tint": "#00629e",
+                        "on-secondary": "#ffffff",
+                        "inverse-on-surface": "#eff1f3",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-secondary-fixed-variant": "#763300",
+                        "surface-container-high": "#e6e8ea",
+                        "tertiary-fixed-dim": "#ffb1c4",
+                        "error-container": "#ffdad6",
+                        "primary-fixed": "#cfe5ff",
+                        "outline": "#707882",
+                        "on-tertiary-container": "#5c0029",
+                        "on-secondary-container": "#672c00",
+                        "on-primary-container": "#002d4d",
+                        "on-tertiary-fixed-variant": "#8f0043",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-dim": "#d8dadc",
+                        "on-surface-variant": "#404751",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#bfc7d3",
+                        "surface-bright": "#f7f9fb",
+                        "on-primary-fixed-variant": "#004a79",
+                        "on-tertiary-fixed": "#3f001a",
+                        "tertiary": "#b80c5a",
+                        "primary-fixed-dim": "#9acbff",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed-dim": "#ffb68d",
+                        "primary-container": "#3198e8",
+                        "on-primary-fixed": "#001d34",
+                        "surface-container": "#eceef0",
+                        "primary": "#00629e",
+                        "background": "#f7f9fb",
+                        "tertiary-fixed": "#ffd9e0",
+                        "secondary-fixed": "#ffdbc9",
+                        "secondary": "#9b4500",
+                        "inverse-primary": "#9acbff",
+                        "surface-container-low": "#f2f4f6",
+                        "inverse-surface": "#2d3133",
+                        "on-error": "#ffffff",
+                        "on-background": "#191c1e",
+                        "on-secondary-fixed": "#331200",
+                        "surface": "#f7f9fb",
+                        "on-error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.5rem",
+                        "lg": "0.5rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "display": ["Plus Jakarta Sans"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Plus Jakarta Sans"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-panel { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-white/80 backdrop-blur-md border-b border-outline-variant/30 sticky top-0 z-50 w-full">
+<div class="flex justify-between items-center px-6 h-16 w-full max-w-7xl mx-auto">
+<div class="flex items-center gap-4">
+<span class="text-2xl font-extrabold tracking-tight text-primary">Weather Friends</span>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-semibold text-sm uppercase tracking-wider" href="forecast.html">Forecast</a>
+<a class="text-primary font-bold transition-colors text-sm uppercase tracking-wider relative after:content-[''] after:absolute after:-bottom-5 after:left-0 after:w-full after:h-0.5 after:bg-primary" href="ai bot.html">Assistant</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-semibold text-sm uppercase tracking-wider" href="insights.html">Insights</a>
+</nav>
+<div class="flex items-center gap-3">
+<button class="p-2 rounded-full hover:bg-surface-container transition-all active:scale-95">
+<span class="material-symbols-outlined text-outline">history</span>
+</button>
+<button class="p-2 rounded-full hover:bg-surface-container transition-all active:scale-95">
+<span class="material-symbols-outlined text-outline">settings</span>
+</button>
+</div>
+</div>
+</header>
+<main class="flex-1 flex w-full max-w-7xl mx-auto overflow-hidden relative">
+<!-- Sidebar -->
+<aside class="hidden lg:flex flex-col w-72 border-r border-outline-variant/20 p-6 gap-8 overflow-y-auto bg-surface-container-lowest/50">
+<div>
+<h3 class="text-[10px] font-extrabold uppercase tracking-[0.2em] text-outline mb-6">Recent Conversations</h3>
+<div class="space-y-3">
+<div class="p-4 rounded-2xl bg-white border border-outline-variant/30 shadow-sm hover:shadow-md hover:border-primary/30 transition-all cursor-pointer group relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary transform -translate-x-full group-hover:translate-x-0 transition-transform"></div>
+<p class="text-on-surface font-bold text-sm mb-1 truncate">Weekend trip to Catskills</p>
+<p class="text-on-surface-variant text-[11px] font-medium opacity-60">2 hours ago</p>
+</div>
+<div class="p-4 rounded-2xl bg-transparent border border-outline-variant/20 hover:bg-white hover:shadow-sm hover:border-outline-variant/40 transition-all cursor-pointer group">
+<p class="text-on-surface font-semibold text-sm mb-1 truncate">Morning run routine</p>
+<p class="text-on-surface-variant text-[11px] font-medium opacity-60">Yesterday</p>
+</div>
+</div>
+</div>
+<div class="mt-auto">
+</div>
+</aside>
+<!-- Chat Canvas -->
+<section class="flex-1 flex flex-col h-[calc(100vh-64px)] overflow-hidden bg-white/40">
+<!-- Chat Scroll Area -->
+<div class="flex-1 overflow-y-auto p-6 md:p-10 space-y-10 scroll-smooth pb-40">
+<!-- User Message -->
+<div class="flex justify-end items-start gap-4">
+<div class="flex flex-col items-end gap-1 max-w-[70%]">
+<div class="bg-primary text-white px-6 py-4 rounded-3xl rounded-tr-none shadow-lg shadow-primary/10">
+<p class="text-sm font-medium leading-relaxed">What should I plan for today in New York?</p>
+</div>
+<span class="text-[10px] text-outline font-bold uppercase tracking-widest mr-2">You • 10:24 AM</span>
+</div>
+<div class="w-9 h-9 rounded-full bg-surface-container-high flex items-center justify-center shrink-0 shadow-sm border border-white">
+<span class="material-symbols-outlined text-primary text-lg">person</span>
+</div>
+</div>
+<!-- AI Message -->
+<div class="flex justify-start items-start gap-4">
+<div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-primary to-primary-container flex items-center justify-center shrink-0 shadow-lg shadow-primary/20 mt-1">
+<span class="material-symbols-outlined text-white text-xl" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</div>
+<div class="space-y-6 max-w-[90%] lg:max-w-[85%]">
+<div class="flex flex-col gap-1">
+<div class="bg-white border border-outline-variant/20 px-6 py-4 rounded-3xl rounded-tl-none shadow-sm">
+<p class="text-sm font-medium text-on-surface leading-relaxed">Based on the forecast for New York today (72°F, Sunny), here are my recommendations:</p>
+</div>
+<span class="text-[10px] text-outline font-bold uppercase tracking-widest ml-2">Weather AI • Just now</span>
+</div>
+<!-- Insight Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- Clothing -->
+<div class="bg-white p-6 rounded-[2rem] flex flex-col gap-4 border border-outline-variant/10 hover:border-secondary/20 hover:shadow-xl hover:shadow-secondary/5 transition-all group cursor-default">
+<div class="w-12 h-12 rounded-2xl bg-secondary-container/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+<span class="material-symbols-outlined text-secondary text-2xl" style="font-variation-settings: 'FILL' 1;">apparel</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface mb-2">Clothing</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed font-medium">Light layers, perhaps a denim jacket for the evening.</p>
+</div>
+</div>
+<!-- Activities -->
+<div class="bg-white p-6 rounded-[2rem] flex flex-col gap-4 border border-outline-variant/10 hover:border-tertiary/20 hover:shadow-xl hover:shadow-tertiary/5 transition-all group cursor-default">
+<div class="w-12 h-12 rounded-2xl bg-tertiary-container/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+<span class="material-symbols-outlined text-tertiary text-2xl" style="font-variation-settings: 'FILL' 1;">park</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface mb-2">Activities</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed font-medium">Perfect for a walk in Central Park or outdoor dining.</p>
+</div>
+</div>
+<!-- Best Time -->
+<div class="bg-white p-6 rounded-[2rem] flex flex-col gap-4 border border-outline-variant/10 hover:border-primary/20 hover:shadow-xl hover:shadow-primary/5 transition-all group cursor-default">
+<div class="w-12 h-12 rounded-2xl bg-primary-container/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+<span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings: 'FILL' 1;">schedule</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface mb-2">Best Time</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed font-medium">Optimal window is between 2 PM and 5 PM.</p>
+</div>
+</div>
+</div>
+<!-- Map Visual -->
+<div class="rounded-[2rem] overflow-hidden w-full border border-outline-variant/20 shadow-lg relative group aspect-[21/9]">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" data-alt="A stylized, modern map illustration of New York City's Central Park and surrounding urban grid. The design uses a clean, light-mode aesthetic with soft blues and vibrant greens for the park area. Minimalist UI elements overlay the map to show temperatures and sunny icons, maintaining the friendly, accessible visual identity of the Weather Friends app." data-location="New York City" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3VEwZUW45YeJ8w93q1BW63yR-IyB3NnhOxYgOQ0X7sK2jteqT5a-jTgn5098bx5O8DbJK2RN9LlM0fX1fwhiwj-x6L0OZXGL41CDm8IDsnK1d4qxbQsoK7U76M2ByzhvIuRJOXdOog7qxCOF65vn3OjKdqjrJAsndKp3pFZtDiA-lfyP75kNQ9Hq6TIUPSY_yP44dVk6e7YYvDtQnbYff8gJhz5Ft1M3x1ZftsV9zHsBB2wATqwqDENzF3eAWyny1PHlWBH_w-ixp"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/60 via-transparent to-transparent"></div>
+<div class="absolute bottom-6 left-8 text-white">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">location_on</span>
+<p class="text-[10px] font-bold uppercase tracking-[0.2em] opacity-90">Local Highlight</p>
+</div>
+<p class="text-2xl font-extrabold tracking-tight">Central Park South</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Input and Quick Actions -->
+<div class="absolute bottom-0 left-0 right-0 px-4 md:px-8 pb-8 pt-10 bg-gradient-to-t from-background via-background/95 to-transparent">
+<div class="max-w-4xl mx-auto space-y-6">
+<!-- Quick Actions Chips -->
+<div class="flex gap-3 overflow-x-auto pb-2 no-scrollbar">
+<button class="px-5 py-2.5 rounded-full bg-white border border-outline-variant/30 text-on-surface-variant hover:border-primary hover:text-primary hover:shadow-md transition-all flex shrink-0 items-center gap-2 text-xs font-bold uppercase tracking-wider group">
+<span class="material-symbols-outlined text-lg group-hover:scale-110 transition-transform">apparel</span>
+                            What should I wear?
+                        </button>
+<button class="px-5 py-2.5 rounded-full bg-white border border-outline-variant/30 text-on-surface-variant hover:border-primary hover:text-primary hover:shadow-md transition-all flex shrink-0 items-center gap-2 text-xs font-bold uppercase tracking-wider group">
+<span class="material-symbols-outlined text-lg group-hover:scale-110 transition-transform">directions_run</span>
+                            Good day for a run?
+                        </button>
+<button class="px-5 py-2.5 rounded-full bg-white border border-outline-variant/30 text-on-surface-variant hover:border-primary hover:text-primary hover:shadow-md transition-all flex shrink-0 items-center gap-2 text-xs font-bold uppercase tracking-wider group">
+<span class="material-symbols-outlined text-lg group-hover:scale-110 transition-transform">umbrella</span>
+                            Will it rain?
+                        </button>
+</div>
+<!-- Input Bar -->
+<div class="relative group">
+<div class="absolute -inset-0.5 bg-gradient-to-r from-primary/20 to-primary-container/20 rounded-full blur opacity-50 group-focus-within:opacity-100 transition duration-500"></div>
+<div class="relative flex items-center gap-3 bg-white p-2 pl-7 rounded-full border border-outline-variant/40 shadow-2xl shadow-primary/10 transition-all">
+<input class="flex-1 bg-transparent border-none focus:ring-0 text-on-surface py-3 font-semibold text-sm placeholder:text-outline/50" placeholder="Ask Weather AI anything..." type="text"/>
+<button class="w-12 h-12 flex items-center justify-center text-outline hover:text-primary hover:bg-surface-container rounded-full transition-all active:scale-90">
+<span class="material-symbols-outlined">mic</span>
+</button>
+<button class="bg-primary text-white w-12 h-12 flex items-center justify-center rounded-full shadow-lg shadow-primary/30 hover:bg-on-primary-fixed-variant hover:scale-105 transition-all active:scale-95">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 500;">send</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pt-3 pb-6 bg-white/95 backdrop-blur-xl border-t border-outline-variant/20 shadow-[0_-8px_24px_rgba(0,0,0,0.05)]">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-2 opacity-60 hover:opacity-100 transition-all" href="forecast.html">
+<span class="material-symbols-outlined">cloud</span>
+<span class="text-[10px] font-extrabold tracking-widest uppercase mt-1">Forecast</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary text-white rounded-2xl px-6 py-2.5 shadow-lg shadow-primary/20 transition-all" href="ai bot.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+<span class="text-[10px] font-extrabold tracking-widest uppercase mt-1">AI Chat</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-2 opacity-60 hover:opacity-100 transition-all" href="insights.html">
+<span class="material-symbols-outlined">lightbulb</span>
+<span class="text-[10px] font-extrabold tracking-widest uppercase mt-1">Insights</span>
+</a>
+</nav>
+</body></html>

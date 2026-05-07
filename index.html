@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface-variant": "#404751",
+                    "error-container": "#ffdad6",
+                    "on-secondary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "surface": "#f7f9fb",
+                    "on-tertiary-fixed": "#3f001a",
+                    "surface-dim": "#d8dadc",
+                    "tertiary-fixed-dim": "#ffb1c4",
+                    "inverse-primary": "#9acbff",
+                    "on-error": "#ffffff",
+                    "primary-fixed-dim": "#9acbff",
+                    "on-primary-fixed": "#001d34",
+                    "surface-bright": "#f7f9fb",
+                    "tertiary": "#b80c5a",
+                    "inverse-on-surface": "#eff1f3",
+                    "error": "#ba1a1a",
+                    "secondary": "#9b4500",
+                    "on-primary-fixed-variant": "#004a79",
+                    "on-secondary-container": "#672c00",
+                    "secondary-fixed-dim": "#ffb1c4",
+                    "on-tertiary-fixed-variant": "#8f0043",
+                    "surface-container-highest": "#e0e3e5",
+                    "surface-container-high": "#e6e8ea",
+                    "secondary-container": "#fc8a40",
+                    "on-secondary-fixed-variant": "#763300",
+                    "on-tertiary": "#ffffff",
+                    "surface-tint": "#00629e",
+                    "on-tertiary-container": "#5c0029",
+                    "secondary-fixed": "#ffdbc9",
+                    "tertiary-container": "#ff508e",
+                    "on-background": "#191c1e",
+                    "on-secondary-fixed": "#331200",
+                    "surface-variant": "#e0e3e5",
+                    "on-error-container": "#93000a",
+                    "on-surface": "#191c1e",
+                    "inverse-surface": "#2d3133",
+                    "outline": "#707882",
+                    "on-primary-container": "#002d4d",
+                    "surface-container": "#eceef0",
+                    "surface-container-low": "#f2f4f6",
+                    "primary-container": "#3198e8",
+                    "outline-variant": "#bfc7d3",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed": "#ffd9e0",
+                    "primary": "#00629e",
+                    "background": "#f7f9fb",
+                    "primary-fixed": "#cfe5ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-margin": "24px",
+                    "gutter": "20px",
+                    "md": "24px",
+                    "xs": "8px",
+                    "base": "4px",
+                    "sm": "16px",
+                    "lg": "40px",
+                    "xl": "64px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Plus Jakarta Sans"],
+                    "label-bold": ["Plus Jakarta Sans"],
+                    "label-sm": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "display-xl": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-bold": ["14px", {"lineHeight": "1.4", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                    "display-xl": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .hero-gradient {
+            background: radial-gradient(circle at top right, #cfe5ff 0%, #f7f9fb 60%);
+        }
+        .ai-glow {
+            box-shadow: 0 0 20px rgba(49, 152, 232, 0.2);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased overflow-x-hidden">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md dark:bg-gray-900/90 border-b border-gray-100 dark:border-gray-800 shadow-sm font-['Plus_Jakarta_Sans'] antialiased">
+<div class="flex justify-between items-center max-w-7xl mx-auto px-6 md:px-12 h-20">
+<div class="text-2xl font-black tracking-tight text-blue-600 dark:text-blue-400">Weather Friends</div>
+<div class="hidden md:flex items-center space-gap-8 gap-8">
+<a class="text-blue-600 dark:text-blue-400 font-bold border-b-2 border-blue-600 px-1 py-1 transition-all duration-300" href="index.html">Features</a>
+<a class="text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-all duration-300" href="index.html">How it Works</a>
+<a class="text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-all duration-300" href="ai bot.html">AI Assistant</a>
+<a class="text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-all duration-300" href="index.html">Pricing</a>
+</div>
+<a href="sign up.html" class="bg-primary text-on-primary px-8 py-3 rounded-full font-label-bold active:scale-95 transform transition-transform duration-150 shadow-lg shadow-primary/20 inline-block">
+                Get Started
+            </a>
+</div>
+</nav>
+<!-- Hero Section -->
+<header class="relative pt-32 pb-24 md:pt-48 md:pb-40 hero-gradient overflow-hidden">
+<div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+<div class="max-w-3xl">
+<h1 class="font-display-xl text-display-xl text-on-background mb-6 leading-tight">
+                    Weather Made <span class="text-primary">Personal</span>
+</h1>
+<p class="text-body-lg text-on-surface-variant mb-10 max-w-xl">
+                    Experience the sky through AI. Get high-precision forecasts paired with personalized lifestyle recommendations tailored to your day.
+                </p>
+<div class="relative max-w-lg mb-10 group">
+<div class="absolute inset-y-0 left-6 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-primary">search</span>
+</div>
+<input class="w-full pl-16 pr-6 py-5 rounded-full bg-white border-0 shadow-xl focus:ring-2 focus:ring-primary outline-none text-body-md transition-all group-hover:shadow-2xl" placeholder="Enter your city or zip code..." type="text"/>
+</div>
+<div class="flex flex-wrap gap-4">
+<a href="sign up.html" class="bg-primary text-on-primary px-10 py-4 rounded-full font-label-bold text-body-md shadow-lg shadow-primary/25 hover:translate-y-[-2px] transition-all inline-block">Get Started Free</a>
+<a href="ai bot.html" class="bg-white text-primary border-2 border-primary/10 px-10 py-4 rounded-full font-label-bold text-body-md hover:bg-primary-fixed transition-all flex items-center gap-2 inline-block">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+                        Try AI Assistant
+                    </a>
+</div>
+</div>
+</div>
+<!-- Decorative Image -->
+<div class="absolute top-24 right-[-10%] md:right-0 w-[600px] h-[600px] pointer-events-none hidden lg:block">
+<img class="w-full h-full object-contain drop-shadow-2xl rounded-full" data-alt="A high-quality 3D rendered weather visualization featuring a bright sun and a soft white cloud in a crystal-clear blue sky. The visual style is optimistic and clean, matching a modern light-mode UI. The lighting is soft and ambient, creating a friendly and inviting atmosphere that represents a perfect clear day." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3hS5DjxAR8U2pi4r3GLc1kJQixasZelqDQF154FXdc6AVO-rbqVIAFnDMg9X46SqfD8ikIkyzwxR5C8-h_EgwBc0BY2Tvq0k-0nIw4HrM8M67e4MPpWEs4nIxuG24YNY5jGolZ2kzSeM1ydsUilX8tCYxDqbBKRuFHspOMJM9fLugfhUCdrNl0TbZV49qAYQQlxBcrcUqMyfn0a4BlN4p36aoKE8cNvvRDPLiAf1oHT52CPI3RHV16etRoaGQcFYiOF0XuTuB4iBl"/>
+</div>
+</header>
+<!-- Features Section: Bento Grid -->
+<section class="py-24 max-w-7xl mx-auto px-6 md:px-12">
+<div class="mb-16">
+<h2 class="font-headline-lg text-headline-lg mb-4">Precision Intelligence</h2>
+<p class="text-on-surface-variant max-w-xl">Every data point we provide is processed through our unique atmospheric AI model to bring you clarity.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-6">
+<!-- Large Card -->
+<div class="md:col-span-2 lg:col-span-3 bg-white p-8 rounded-[32px] shadow-sm hover:shadow-md transition-all border border-surface-container-highest group">
+<div class="w-16 h-16 rounded-2xl bg-primary-fixed flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">my_location</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-3">Location Picker</h3>
+<p class="text-on-surface-variant mb-6">Hyper-local tracking down to your exact neighborhood block for ultimate precision.</p>
+<div class="h-48 rounded-2xl overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A sophisticated digital map visualization showing hyper-local weather patterns over a modern city grid. The map uses a soft blue and grey color scheme with subtle glowing pins indicating specific neighborhood locations. The style is professional and high-tech, fitting within a clean white design system." data-location="San Francisco" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIS8JT6xWvpQSAWKK7Qbfk7WpQKbeJnRPx9e5hYoDlhge140mw1JYAsMR8wW7YQKfYeef2LckeIPXEv7DORWeZRgLWCNw_yV2cc9u2q3gEdf-k6iquauHcSw5eghl_ianvVPbZJCi0aFHt5DL_f5Z0OsSSH8D5Fi7dNm5-gq-5JoLIJyydKBecU9mOI1ITpv7Ak-FdWb18duSF-76-GQkXTiDOj9DydcE3Mg0z4PIIM3l_LpN15xK4wGPh1Ed_pHONteFji4pK6aG1"/>
+</div>
+</div>
+<!-- Standard Cards -->
+<div class="md:col-span-1 lg:col-span-3 bg-white p-8 rounded-[32px] shadow-sm hover:shadow-md transition-all border border-surface-container-highest group flex flex-col justify-between">
+<div>
+<div class="w-14 h-14 rounded-2xl bg-secondary-fixed flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-secondary text-2xl">monitoring</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-3">Real-Time Data</h3>
+<p class="text-on-surface-variant">Live streaming atmospheric updates every 60 seconds from over 40,000 global stations.</p>
+</div>
+<div class="mt-8 flex items-center justify-between bg-surface-container-low p-4 rounded-xl">
+<span class="text-label-bold">Humidity 45%</span>
+<span class="text-primary font-bold">Stable</span>
+</div>
+</div>
+<div class="lg:col-span-2 bg-primary-container p-8 rounded-[32px] shadow-lg text-on-primary group flex flex-col justify-between overflow-hidden relative">
+<div class="relative z-10">
+<div class="w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-white text-2xl">checkroom</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-3">AI Clothing Advisor</h3>
+<p class="text-on-primary/80">Never be underdressed. AI analyzes temperature and wind chill to suggest the perfect layers.</p>
+</div>
+<div class="absolute bottom-[-10%] right-[-10%] opacity-20 group-hover:scale-125 transition-transform duration-500">
+<span class="material-symbols-outlined text-[160px]">apparel</span>
+</div>
+</div>
+<div class="lg:col-span-2 bg-white p-8 rounded-[32px] shadow-sm hover:shadow-md transition-all border border-surface-container-highest group">
+<div class="w-14 h-14 rounded-2xl bg-tertiary-fixed flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-tertiary text-2xl">calendar_month</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-3">Extended Forecasts</h3>
+<p class="text-on-surface-variant">Detailed 14-day outlooks with proprietary probability metrics for outdoor planning.</p>
+</div>
+<div class="lg:col-span-2 bg-white p-8 rounded-[32px] shadow-sm hover:shadow-md transition-all border border-surface-container-highest group">
+<div class="w-14 h-14 rounded-2xl bg-surface-container-highest flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-on-surface-variant text-2xl">hiking</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-3">Activity Suggestions</h3>
+<p class="text-on-surface-variant">From running to surfing, we know the best times for your favorite hobbies.</p>
+</div>
+</div>
+</section>
+<!-- Process Section -->
+<section class="py-24 bg-surface">
+<div class="max-w-7xl mx-auto px-6 md:px-12">
+<div class="text-center mb-20">
+<h2 class="font-display-xl text-headline-lg md:text-display-xl mb-4">Weather Insights in 3 Simple Steps</h2>
+<p class="text-on-surface-variant max-w-2xl mx-auto">Our streamlined interface takes you from curiosity to clarity in seconds.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
+<!-- Connector Line (Desktop) -->
+<div class="hidden md:block absolute top-1/3 left-1/4 right-1/4 h-0.5 bg-dashed border-t-2 border-dashed border-outline-variant z-0"></div>
+<!-- Step 1 -->
+<div class="relative z-10 text-center">
+<div class="w-20 h-20 rounded-full bg-white shadow-xl flex items-center justify-center mx-auto mb-8 border-4 border-primary-fixed">
+<span class="material-symbols-outlined text-primary text-3xl">search</span>
+</div>
+<h4 class="font-headline-md text-headline-md mb-4">Search</h4>
+<p class="text-on-surface-variant">Enter your location or let our geo-sensors find you instantly.</p>
+</div>
+<!-- Step 2 -->
+<div class="relative z-10 text-center">
+<div class="w-20 h-20 rounded-full bg-white shadow-xl flex items-center justify-center mx-auto mb-8 border-4 border-secondary-fixed">
+<span class="material-symbols-outlined text-secondary text-3xl">bar_chart</span>
+</div>
+<h4 class="font-headline-md text-headline-md mb-4">View Data</h4>
+<p class="text-on-surface-variant">Explore beautiful visualizations of humidity, UV, and pressure.</p>
+</div>
+<!-- Step 3 -->
+<div class="relative z-10 text-center">
+<div class="w-20 h-20 rounded-full bg-white shadow-xl flex items-center justify-center mx-auto mb-8 border-4 border-tertiary-fixed">
+<span class="material-symbols-outlined text-tertiary text-3xl">smart_toy</span>
+</div>
+<h4 class="font-headline-md text-headline-md mb-4">AI Recommendations</h4>
+<p class="text-on-surface-variant">Receive personalized tips for your outfit, health, and schedule.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- AI Showcase -->
+<section class="py-24 max-w-7xl mx-auto px-6 md:px-12 overflow-hidden">
+<div class="flex flex-col lg:flex-row items-center gap-16">
+<div class="lg:w-1/2">
+<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-fixed text-on-primary-fixed-variant font-label-bold text-sm mb-6">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                    MEET YOUR COMPANION
+                </div>
+<h2 class="font-display-xl text-display-xl mb-8">Your Smart Weather Companion</h2>
+<p class="text-body-lg text-on-surface-variant mb-10">
+                    Beyond just numbers, Weather Friends talks to you. Our advanced AI understands your context, suggesting whether to carry an umbrella or pack an extra light jacket for your evening walk.
+                </p>
+<div class="space-y-6">
+<div class="flex gap-4 p-4 rounded-2xl bg-white border border-surface-container-highest shadow-sm">
+<div class="w-12 h-12 shrink-0 rounded-xl bg-primary-container flex items-center justify-center text-white">
+<span class="material-symbols-outlined">wb_sunny</span>
+</div>
+<div>
+<p class="font-label-bold">Optimized for Health</p>
+<p class="text-on-surface-variant text-sm">AI monitors high-pollen days and UV spikes to alert you when to take precautions.</p>
+</div>
+</div>
+<div class="flex gap-4 p-4 rounded-2xl bg-white border border-surface-container-highest shadow-sm">
+<div class="w-12 h-12 shrink-0 rounded-xl bg-tertiary-container flex items-center justify-center text-white">
+<span class="material-symbols-outlined">commute</span>
+</div>
+<div>
+<p class="font-label-bold">Commute Alerts</p>
+<p class="text-on-surface-variant text-sm">Proactive notifications about sudden rain or fog that might impact your travel.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Chat Mockup -->
+<div class="lg:w-1/2 w-full relative">
+<div class="bg-gray-900 rounded-[40px] p-6 shadow-2xl ai-glow border-8 border-gray-800">
+<div class="flex items-center gap-3 border-b border-gray-800 pb-4 mb-6">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-xl" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</div>
+<span class="text-white font-bold">Weather Assistant</span>
+</div>
+<div class="space-y-6 min-h-[400px]">
+<!-- User Msg -->
+<div class="flex justify-end">
+<div class="bg-primary/20 text-blue-100 p-4 rounded-2xl rounded-tr-none max-w-[80%]">
+                                How's the day looking for a park trip?
+                            </div>
+</div>
+<!-- AI Msg -->
+<div class="flex justify-start">
+<div class="bg-gray-800 text-white p-4 rounded-2xl rounded-tl-none max-w-[80%]">
+<p class="mb-3">It's a beautiful day! Currently <span class="text-secondary-container font-bold">72°F</span> with clear skies.</p>
+<div class="bg-gray-700/50 p-3 rounded-xl border border-gray-600 mb-3">
+<p class="text-xs uppercase text-gray-400 font-bold mb-2">AI Suggestions</p>
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-2 text-sm">
+<span class="material-symbols-outlined text-primary-fixed-dim text-sm">check_circle</span>
+                                            Wear a light cotton t-shirt and shorts.
+                                        </div>
+<div class="flex items-center gap-2 text-sm">
+<span class="material-symbols-outlined text-primary-fixed-dim text-sm">check_circle</span>
+                                            Great for jogging or a picnic.
+                                        </div>
+</div>
+</div>
+<p class="text-sm italic text-gray-400">UV is moderate (4), apply some sunscreen!</p>
+</div>
+</div>
+</div>
+<div class="mt-6 flex gap-2">
+<div class="flex-1 bg-gray-800 rounded-full px-4 py-3 text-gray-500 text-sm">Ask about your outfit...</div>
+<div class="w-11 h-11 rounded-full bg-primary flex items-center justify-center text-white">
+<span class="material-symbols-outlined">send</span>
+</div>
+</div>
+</div>
+<!-- Floating decorative element -->
+<div class="absolute -bottom-6 -right-6 w-32 h-32 bg-secondary-container rounded-3xl -rotate-12 blur-2xl opacity-20 z-0"></div>
+</div>
+</div>
+</section>
+<!-- Pricing Section -->
+<section class="py-24 bg-surface-container-low">
+<div class="max-w-7xl mx-auto px-6 md:px-12">
+<div class="text-center mb-16">
+<h2 class="font-headline-lg text-headline-lg mb-4">Simple, Transparent Pricing</h2>
+<p class="text-on-surface-variant">Choose the plan that best fits your lifestyle.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-end">
+<!-- Basic Plan Card -->
+<div class="bg-white/50 rounded-[32px] p-8 border border-outline-variant/30 flex flex-col grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all">
+<div class="mb-8">
+<h3 class="font-headline-md text-on-surface mb-2">Basic</h3>
+<div class="flex items-baseline gap-1">
+<span class="text-3xl font-extrabold">$0</span>
+<span class="text-on-surface-variant">/month</span>
+</div>
+</div>
+<ul class="space-y-4 mb-10 flex-grow">
+<li class="flex items-center gap-3 text-sm">
+<span class="material-symbols-outlined text-outline text-lg">done</span>
+<span>Standard Weather Data</span>
+</li>
+<li class="flex items-center gap-3 text-sm">
+<span class="material-symbols-outlined text-outline text-lg">done</span>
+<span>Single Location</span>
+</li>
+<li class="flex items-center gap-3 text-sm opacity-40">
+<span class="material-symbols-outlined text-lg">close</span>
+<span>No AI Assistant</span>
+</li>
+</ul>
+<button class="w-full bg-surface-container-highest text-on-surface-variant py-3 rounded-full font-label-bold text-sm">Current Plan</button>
+</div>
+<!-- Pro Plan Card -->
+<div class="bg-white rounded-[32px] p-10 shadow-xl border-2 border-primary relative transform hover:scale-105 transition-transform duration-300">
+<div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-primary text-on-primary px-6 py-2 rounded-full font-label-bold text-xs tracking-wider">MOST POPULAR</div>
+<div class="text-center mb-8">
+<h3 class="font-headline-md text-on-surface mb-2">Pro</h3>
+<div class="flex items-baseline justify-center gap-1">
+<span class="text-5xl font-extrabold text-primary">$9</span>
+<span class="text-on-surface-variant">/month</span>
+</div>
+</div>
+<ul class="space-y-4 mb-10">
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary font-bold">done</span>
+<span class="font-medium">Multi-location Tracking</span>
+</li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary font-bold">done</span>
+<span>Unlimited Search History</span>
+</li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary font-bold">done</span>
+<span>Ad-free Experience</span>
+</li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary font-bold">done</span>
+<span>Detailed UV Insights</span>
+</li>
+</ul>
+<button class="w-full bg-primary text-on-primary py-4 rounded-full font-label-bold text-lg shadow-lg shadow-primary/20 hover:opacity-90 transition-opacity">Get Pro Now</button>
+</div>
+<!-- Premium Plan Card -->
+<div class="bg-primary-container rounded-[32px] p-10 shadow-lg text-on-primary relative transform transition-transform hover:scale-105">
+<div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-tertiary text-white px-6 py-2 rounded-full font-label-bold text-xs tracking-wider">ULTIMATE POWER</div>
+<div class="text-center mb-8">
+<h3 class="font-headline-md mb-2">Premium</h3>
+<div class="flex items-baseline justify-center gap-1">
+<span class="text-4xl font-extrabold">$19</span>
+<span class="opacity-80 text-sm">/month</span>
+</div>
+</div>
+<ul class="space-y-4 mb-10">
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-white font-bold">auto_awesome</span>
+<span class="font-bold">AI Assistant Bot</span>
+</li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-white/80">done</span>
+<span>Everything in Pro</span>
+</li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-white/80">done</span>
+<span>Personalized Outfit AI</span>
+</li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-white/80">done</span>
+<span>Real-time Health Alerts</span>
+</li>
+</ul>
+<div class="space-y-3">
+<button class="w-full bg-white text-primary py-4 rounded-full font-label-bold text-lg hover:bg-primary-fixed transition-colors">Start Free 3-Day Trial</button>
+<p class="text-center text-xs opacity-70">Cancel anytime, no questions asked</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="w-full mt-24 py-12 bg-gray-50 dark:bg-gray-950 border-t border-gray-200 dark:border-gray-800 font-['Plus_Jakarta_Sans'] text-sm text-gray-500 dark:text-gray-400">
+<div class="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+<div class="col-span-1 lg:col-span-1">
+<div class="text-xl font-bold text-gray-900 dark:text-white mb-6">Weather Friends</div>
+<p class="mb-6 opacity-90">Transforming meteorological data into your friendliest daily companion with AI-driven insights.</p>
+<div class="flex gap-4">
+<div class="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center cursor-pointer hover:bg-blue-500 hover:text-white transition-all">
+<span class="material-symbols-outlined text-xl">public</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center cursor-pointer hover:bg-blue-500 hover:text-white transition-all">
+<span class="material-symbols-outlined text-xl">share</span>
+</div>
+</div>
+</div>
+<div>
+<h5 class="text-gray-900 dark:text-white font-bold mb-6">Product</h5>
+<ul class="space-y-4">
+<li><a class="hover:text-blue-500 transition-all hover:underline" href="index.html">Features</a></li>
+<li><a class="hover:text-blue-500 transition-all hover:underline" href="ai bot.html">AI Assistant</a></li>
+<li><a class="hover:text-blue-500 transition-all hover:underline" href="insights.html">Weather Maps</a></li>
+<li><a class="hover:text-blue-500 transition-all hover:underline" href="index.html">Pricing</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-gray-900 dark:text-white font-bold mb-6">Support</h5>
+<ul class="space-y-4">
+<li><a class="hover:text-blue-500 transition-all hover:underline" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-blue-500 transition-all hover:underline" href="#">Terms of Service</a></li>
+<li><a class="hover:text-blue-500 transition-all hover:underline" href="#">Support</a></li>
+<li><a class="hover:text-blue-500 transition-all hover:underline" href="#">Careers</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-gray-900 dark:text-white font-bold mb-6">Download</h5>
+<div class="flex flex-col gap-3">
+<div class="bg-gray-900 text-white px-6 py-3 rounded-xl flex items-center gap-3 cursor-pointer hover:bg-gray-800 transition-all border border-gray-700">
+<span class="material-symbols-outlined">phone_iphone</span>
+<div>
+<p class="text-[10px] leading-none uppercase opacity-60">App Store</p>
+<p class="font-bold">iOS Mobile</p>
+</div>
+</div>
+<div class="bg-gray-900 text-white px-6 py-3 rounded-xl flex items-center gap-3 cursor-pointer hover:bg-gray-800 transition-all border border-gray-700">
+<span class="material-symbols-outlined">robot</span>
+<div>
+<p class="text-[10px] leading-none uppercase opacity-60">Google Play</p>
+<p class="font-bold">Android App</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-6 md:px-12 mt-16 pt-8 border-t border-gray-200 dark:border-gray-800 text-center opacity-90">
+            © 2024 Weather Friends. Your optimistic weather companion.
+        </div>
+</footer>
+</body></html>
